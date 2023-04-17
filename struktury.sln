@@ -1,0 +1,69 @@
+using System;
+
+namespace _09cv06vs15Struktury
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Point P = new Point(5, 10);
+            P.Print();
+
+            Point A = P.AddPoint(new Point(100,200));
+            A.Print();
+
+            Point B = new Point(2, 6);
+            Console.WriteLine(P.Distance(B));
+            Console.ReadKey();
+        }
+    }
+
+    public struct Point
+    {
+        // podobné jako třídy
+        // mohou implementovat rozhranní
+        // struktury jsou hodnotové datové typy
+        // třídy jsou referenční datové typy
+        private int x;
+        private int y;
+
+        public Point(int x, int y) // nemůže být bezparametrický, musí implementovat všechny datové členy
+        {
+            this.x = x;
+            this.y = y;
+        }
+
+        public int X
+        {
+            get{return x;}
+            set{x = value;}
+        }
+
+        public int Y
+        {
+            get{return y;}
+            set{ y = value;}
+        }
+
+        public void Print()
+        {
+            Console.WriteLine($"[{x};{y}]");
+        }
+
+        public Point AddPoint(Point A)
+        {
+            Point newPoint = new Point();
+            newPoint.X = this.X + A.X;
+            newPoint.Y = this.Y + A.Y;
+
+            return newPoint;
+        }
+
+        public double Distance(Point A)
+        {
+            double difx = this.X - A.X;
+                double dify = this.Y - A.Y;
+            return Math.Sqrt(difx*difx + dify*dify);
+        }
+    }
+}
